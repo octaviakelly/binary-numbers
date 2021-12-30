@@ -1,0 +1,56 @@
+import math
+
+def add_binary(a,b):
+    #sum input numbers to make x
+    x=a+b
+    #print out what x is
+    print("x: "+str(x))
+    #k is the integer power below or equal to the power of 2 that makes x
+    k=math.floor(math.log2(x))
+    print("k (x as power of 2): " + str(k))
+    #number of digits in the binary number equivalent to x is numDigs
+    numDigs=k+1
+    print("No. of digits: " + str(numDigs))
+    #create list and append the same number of zeroes as there are digits in the binary number
+    #List length therefore equals length of binary number
+    #each additional digit is an extra column. 
+    myList=[]
+    for i in range(numDigs):
+        myList.append(0)
+    #print(myList)
+
+    #create list to which each digit of the binary number will be appended 
+    theList=[]
+    #column 1 is column 2^0 so start list at -1
+    for i in range((len(myList)-1),-1,-1):
+        #c is column number
+        c=i+1
+        #the digits in each column alternate between 0 and 1 at a frequency determined by k
+        #all columns start with 0
+        #s is the number of rows between each change from 0 to 1 or from 1 to 0
+        s=2**(c-1)
+        #modulo x to find out whether digit in relevant column corresponds to odd or even k.
+        #print("Col. no: "+str(c)+ " Step size: "+str(s))
+        #for each digit in the binary number, find the number of changes between 1 and 0 at that value of x (row number)
+        #append the number of changes to theList
+        theList.append(x/s)
+        #if the number of changes is even, the digit will be zero, if odd, it will be 1
+        for i in range(len(theList)):
+            if (math.floor(theList[i]))%2==0:
+                theList[i]=0
+            else:
+                theList[i]=1
+        
+    #print(theList)
+    #create string version of theList to create string binary number
+    strList=[]
+    for i in theList:
+        strList.append(str(i))
+    print(strList)
+    strNum="".join(strList)
+    return(strNum)
+        
+    
+        
+
+add_binary(2,0)
